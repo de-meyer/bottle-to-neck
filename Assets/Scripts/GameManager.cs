@@ -28,16 +28,16 @@ public class GameManager : MonoBehaviour
 
   void Start()
   {
-    List<float> frequencies = GegenrateFrequencies();
+    List<int> frequencies = GenerateFrequencies();
     string log = "Frequencies: ";
-    foreach (float frequency in frequencies)
+    foreach (int frequency in frequencies)
     {
       log += frequency + ", ";
     }
     Debug.Log(log);
   }
 
-  List<float> GegenrateFrequencies()
+  List<int> GenerateFrequencies()
   {
     int bottleLevel = maxBottleLevel;
 
@@ -89,10 +89,10 @@ public class GameManager : MonoBehaviour
 
 
     // translate volume to frequency
-    List<float> frequencies = new List<float>();
+    List<int> frequencies = new List<int>();
     foreach (int volume in airVolumesAfterEachSip)
     {
-      float frequency = TranslateVolumeToFrequency(volume);
+      int frequency = TranslateVolumeToFrequency(volume);
       frequencies.Add(frequency);
     }
 
@@ -107,10 +107,10 @@ public class GameManager : MonoBehaviour
     return frequencies;
   }
 
-  float TranslateVolumeToFrequency(int volume)
+  int TranslateVolumeToFrequency(int volume)
   {
 
-    float frequency = frequencyWhenEmpty + (volume - volumeWhenEmpty) * (frequencyWhenFull - frequencyWhenEmpty) / (volumeWhenFull - volumeWhenEmpty);
+    int frequency = Mathf.FloorToInt(frequencyWhenEmpty + (volume - volumeWhenEmpty) * (frequencyWhenFull - frequencyWhenEmpty) / (volumeWhenFull - volumeWhenEmpty));
 
     return frequency;
   }
