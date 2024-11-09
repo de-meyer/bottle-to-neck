@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Media;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int trialLeniencyAmount;
     //[SerializeField] private int trialLeniencyFrequency;
     [SerializeField] private Text scoreDisplay;
+    [SerializeField] private AudioSource victorySoundPlayer;
     
     
     /** idealValue is the Hz value we are looking for,
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("StartedTrialPhase");
         StartCoroutine(TrialPhaseCoroutine(idealValue));
         //return calculateScore(audioListener.getHzScores(), idealValue);
+        //Debugging:
     }
 
     private int calculateScore(List<int> hzScores, int idealValue)
@@ -43,12 +46,24 @@ public class GameManager : MonoBehaviour
         int actualValue = FindKeyWithHighestValue(scoreMap);
         Debug.Log("Closest Value: " + actualValue);
         int score = 100 - Math.Abs(idealValue-actualValue);
+        Debug.Log("Score: " + score);
         if (score > 0)
         {
+            if (score == 100)
+            {
+                playVictorySound(idealValue);
+            }
             return score;
         }
         return 0;
         
+    }
+
+    void playVictorySound(int goalPitch)
+    {
+        Debug.Log("Victoryyyyy " + 233.0f / goalPitch);
+        victorySoundPlayer.pitch = 233.0f / goalPitch;
+        victorySoundPlayer.Play();
     }
 
     // Method to find the key associated with the closest value to the target
