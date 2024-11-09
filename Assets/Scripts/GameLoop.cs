@@ -39,7 +39,7 @@ public class GameLoop : MonoBehaviour
         charAnimatorP2.SetBool("isDrinking", true);
         //charAnimator.SetTrigger("IsDrinking");
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         
         charAnimatorP1.SetBool("isDrinking", false);
         charAnimatorP2.SetBool("isDrinking", false);
