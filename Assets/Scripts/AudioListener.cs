@@ -66,7 +66,7 @@ public class AudioListener : MonoBehaviour
             // Get the dominant frequency
             int pitch = GetDominantFrequency();
             hzScores.Add(pitch);
-            Debug.Log("Detected Pitch: " + pitch);
+            //Debug.Log("Detected Pitch: " + pitch);
         }
     }
 
@@ -97,7 +97,7 @@ public class AudioListener : MonoBehaviour
     int GetDominantFrequency()
     {
         float freqPerBin = 44100 / FFTSize+0.810810811f;
-        Debug.Log("Frequency per bin " + freqPerBin);
+        //Debug.Log("Frequency per bin " + freqPerBin);
         int maxIndex = 0;
         float maxMagnitude = 0;
 
@@ -112,7 +112,7 @@ public class AudioListener : MonoBehaviour
                 maxIndex = i;
             }
         }
-        Debug.Log("MaxIndex: " + maxIndex);
+        //Debug.Log("MaxIndex: " + maxIndex);
 
         int maxHz = (int)Mathf.Round(maxIndex * freqPerBin);
         return maxHz-1;

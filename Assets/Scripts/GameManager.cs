@@ -152,23 +152,12 @@ public class GameManager : MonoBehaviour
     //Debug.Log("Closest Value: " + actualValue);
     float idealVolume = TranslateFrequencyToVolume(idealValue);
     float actualVolume = TranslateFrequencyToVolume(actualValue);
-    int score = 0;
-    if ((int)Math.Abs(idealVolume - actualVolume) != 0)
-    {
-        score = 330 / (int)Math.Abs(idealVolume - actualVolume);
-        score *= 100;
-    }
-    score = 100 - score;
-    //Debug.Log("Score: " + score);
-    if (score > 0)
-    {
-      if (score == 100)
-      {
-        playVictorySound(idealValue);
-      }
-      return score;
-    }
-    return 0;
+    float calcScore = 0f;
+    Debug.Log("DifferenceVolume: " + Math.Abs(idealVolume - actualVolume));
+    calcScore = Math.Abs(idealVolume - actualVolume) / 300;
+    calcScore *= 100;
+    int score = (int)Math.Round(100 - calcScore);
+    return score;
 
   }
 
@@ -261,6 +250,6 @@ public class GameManager : MonoBehaviour
 
     currentScore = calculateScore(audioListener.getHzScores(), idealValue);
 
-    Debug.Log("End Trigger Trial Phase" + currentScore);
+    Debug.Log("End Trigger Trial Phase " + currentScore);
   }
 }
