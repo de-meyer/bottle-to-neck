@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioListener : MonoBehaviour
@@ -6,6 +7,8 @@ public class AudioListener : MonoBehaviour
     private float[] samples;
     private Complex[] complexSamples;
     private string selectedDevice;
+
+    private List<int> hzScores = new List<int>();
     [SerializeField] private AudioSource audioSource;
 
     void Start()
@@ -33,6 +36,11 @@ public class AudioListener : MonoBehaviour
         }
     }
 
+    public List<int> getHzScores()
+    {
+        return hzScores;
+    }
+
     void Update()
     {
         if (Microphone.IsRecording(selectedDevice))
@@ -55,6 +63,7 @@ public class AudioListener : MonoBehaviour
 
             // Get the dominant frequency
             int pitch = GetDominantFrequency();
+            hzScores.Add(pitch);
             Debug.Log("Detected Pitch: " + pitch);
         }
     }
