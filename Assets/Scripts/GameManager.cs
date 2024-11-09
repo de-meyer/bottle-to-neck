@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Media;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -151,7 +152,13 @@ public class GameManager : MonoBehaviour
     //Debug.Log("Closest Value: " + actualValue);
     float idealVolume = TranslateFrequencyToVolume(idealValue);
     float actualVolume = TranslateFrequencyToVolume(actualValue);
-    int score = 100 - (int)Math.Abs(idealVolume - actualVolume);
+    int score = 0;
+    if ((int)Math.Abs(idealVolume - actualVolume) != 0)
+    {
+        score = 330 / (int)Math.Abs(idealVolume - actualVolume);
+        score *= 100;
+    }
+    score = 100 - score;
     //Debug.Log("Score: " + score);
     if (score > 0)
     {
