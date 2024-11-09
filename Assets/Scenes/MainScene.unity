@@ -1910,7 +1910,6 @@ MonoBehaviour:
   afterMuffleSoundPercent: 50
   audioListener: {fileID: 1432295797}
   trialLeniencyAmount: 0
-  scoreDisplay: {fileID: 0}
   victorySoundPlayer: {fileID: 930929512}
 --- !u!114 &1164571537
 MonoBehaviour:
@@ -1933,7 +1932,7 @@ MonoBehaviour:
   scoreTextfieldPlayer1: {fileID: 214406799}
   scoreTextFieldPlayer2: {fileID: 658135726}
   gameManager: {fileID: 1164571536}
-  currentFrequency: 500
+  currentFrequency: 200
 --- !u!1 &1432295794
 GameObject:
   m_ObjectHideFlags: 0
