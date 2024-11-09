@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour
         //int actualValue = FindKeyWithClosestValue(scoreMap, idealValue);
         int actualValue = FindKeyWithHighestValue(scoreMap);
         //Debug.Log("Closest Value: " + actualValue);
-        int score = 100 - Math.Abs(idealValue-actualValue);
+        float idealVolume = TranslateFrequencyToVolume(idealValue);
+        float actualVolume = TranslateFrequencyToVolume(actualValue);
+        int score = 100 - (int)Math.Abs(idealVolume-actualVolume);
         //Debug.Log("Score: " + score);
         if (score > 0)
         {
@@ -116,6 +118,22 @@ public class GameManager : MonoBehaviour
             }
         }
         return keyWithHighestValue; // Return the key with the highest value
+    }
+
+     // returns the volume or air (including the bottleneck of 41ml) resulting in 41ml - 371ml
+    // real life measurements
+    const int volumeWhenFull = 41;                               // Milliliters
+    const int maxBottleLevel = 330;                              // Milliliters
+    const int volumeWhenEmpty = volumeWhenFull + maxBottleLevel; // Milliliters
+    const float frequencyWhenFull = 1376;                        // Hertz
+    const float frequencyWhenEmpty = 172;                        // Hertz
+
+    // returns the volume or air (including the bottleneck of 41ml) resulting in 41ml - 371ml
+    float TranslateFrequencyToVolume(float frequency)
+    {
+        float volume = volumeWhenEmpty + (frequency - frequencyWhenEmpty) * (volumeWhenFull - volumeWhenEmpty) / (frequencyWhenFull - frequencyWhenEmpty);
+
+        return volume;
     }
     private IEnumerator TrialPhaseCoroutine(int idealValue, int recLenghInSec)
     {
