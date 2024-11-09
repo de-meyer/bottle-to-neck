@@ -9,23 +9,27 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private AudioSource musicPlayer;
     [SerializeField] private int afterMuffleSoundPercent;
-    [SerializeField] private int trialLengthSec;
     [SerializeField] private AudioListener audioListener;
     [SerializeField] private int trialLeniencyAmount;
     //[SerializeField] private int trialLeniencyFrequency;
     [SerializeField] private Text scoreDisplay;
     [SerializeField] private AudioSource victorySoundPlayer;
+
+    private int currentScore;
     
     
     /** idealValue is the Hz value we are looking for,
     @return the score on a scale from 1 to 100
     */
-    public void TriggerTrialPhase(int idealValue)
+    public void TriggerTrialPhase(int idealValue, int recLenghInSec)
     {
         Debug.Log("StartedTrialPhase");
-        StartCoroutine(TrialPhaseCoroutine(idealValue));
-        //return calculateScore(audioListener.getHzScores(), idealValue);
-        //Debugging:
+        StartCoroutine(TrialPhaseCoroutine(idealValue, recLenghInSec));
+    }
+
+    public int getScore()
+    {
+        return currentScore;
     }
 
     private int calculateScore(List<int> hzScores, int idealValue)
@@ -115,7 +119,7 @@ public class GameManager : MonoBehaviour
         }
         return keyWithHighestValue; // Return the key with the highest value
     }
-    private IEnumerator TrialPhaseCoroutine(int idealValue)
+    private IEnumerator TrialPhaseCoroutine(int idealValue, int recLenghInSec)
     {
         Debug.Log("Trigger Trial Phase");
         float oldVolume = musicPlayer.volume;
@@ -130,7 +134,7 @@ public class GameManager : MonoBehaviour
         audioListener.StartRecording();
         
         // Wait for trialLengthSec seconds
-        yield return new WaitForSeconds(trialLengthSec);
+        yield return new WaitForSeconds(recLenghInSec);
         
         // Restore the old volume
         musicPlayer.volume = oldVolume;
@@ -138,7 +142,7 @@ public class GameManager : MonoBehaviour
         // Stop recording
         audioListener.StopRecording();
 
-        scoreDisplay.text = calculateScore(audioListener.getHzScores(), idealValue).ToString();
+        currentScore = calculateScore(audioListener.getHzScores(), idealValue);
 
         Debug.Log("End Trigger Trial Phase");
     }
