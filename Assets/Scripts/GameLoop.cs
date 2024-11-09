@@ -17,7 +17,7 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private TextMeshProUGUI scoreTextFieldPlayer2;
 
   [SerializeField] private GameManager gameManager;
-  [SerializeField] private AudioListener audioListener;
+  [SerializeField] private AudioManager audioListener; 
 
   private int currentFrequency;
   private bool player1Recorded = false;
@@ -86,7 +86,7 @@ public class GameLoop : MonoBehaviour
 
   #region private methods
   
-  private void BottleToNeck(int winner)
+  public void BottleToNeck(int winner)
   {
     if (winner == 1)
     {

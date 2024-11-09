@@ -2,7 +2,7 @@ using UnityEngine;
 
 using UnityEngine;
 
-   public class audioManager : MonoBehaviour
+   public class AudioManager : MonoBehaviour
    {
        [SerializeField] private AudioSource audioSource;   // Reference to the AudioSource component
        [SerializeField] private AudioClip[] audioClips;    // Array to hold different AudioClips

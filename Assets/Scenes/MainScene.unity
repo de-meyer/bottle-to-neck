@@ -452,7 +452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 213
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ddf2c2d7a375ee9f8ff55cb0b4a4b23, type: 2}
   m_sharedMaterial: {fileID: 4401142825364903798, guid: 7ddf2c2d7a375ee9f8ff55cb0b4a4b23, type: 2}
@@ -1047,7 +1047,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 356
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7ddf2c2d7a375ee9f8ff55cb0b4a4b23, type: 2}
   m_sharedMaterial: {fileID: 4401142825364903798, guid: 7ddf2c2d7a375ee9f8ff55cb0b4a4b23, type: 2}
@@ -1644,16 +1644,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a9eb3fa81298445b428ddd02a72469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
   charAnimatorP1: {fileID: 1725620711}
   charAnimatorP2: {fileID: 114675598}
   startCanvas: {fileID: 5506820860607201726}
   gameCanvas: {fileID: 329065858}
+  gameOverCanvas: {fileID: 0}
   textfield: {fileID: 241561859}
   scoreTextfieldPlayer1: {fileID: 214406799}
   scoreTextFieldPlayer2: {fileID: 658135726}
   gameManager: {fileID: 1164571536}
-  currentFrequency: 280
+  audioListener: {fileID: 0}
 --- !u!1 &1432295794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2276,7 +2276,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905659647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -41.425}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2284,8 +2284,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 78.40195}
-  m_SizeDelta: {x: 0, y: 168.063}
+  m_AnchoredPosition: {x: 0, y: 85}
+  m_SizeDelta: {x: 0, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905659649
 MonoBehaviour:
