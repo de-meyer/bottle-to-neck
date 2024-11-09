@@ -34,6 +34,10 @@ public class Timer : MonoBehaviour
         {
           DisplayTime(timeRemaining);
         }
+        if (timeRemaining <= 0)
+        {
+          PlaySound();
+        }
       }
       else
       {
@@ -54,7 +58,24 @@ public class Timer : MonoBehaviour
     else
     {
       timeText.text = "*toooot*";
-      audioSource.Play();
     }
+  }
+
+  void PlaySound()
+  {
+    // 1f   pitch results in   172Hz
+    // // 7.2f pitch results in 1.375Hz (only by testing not by math)
+    // 18   pitch results in 1.376Hz
+
+    float emptyBottleFrequency = 172f;
+    float fullBottleFrequency = 1376f;
+
+    float randomFrequency = Random.Range(emptyBottleFrequency, fullBottleFrequency) + emptyBottleFrequency;
+    // random pitch between 1 and 8
+    float randomPitch = randomFrequency / emptyBottleFrequency;
+    Debug.Log("Frequency set to " + randomFrequency + "Hz, pitch set to " + randomPitch);
+    audioSource.pitch = randomPitch;
+    Debug.Log("Pitch set to " + randomPitch);
+    audioSource.Play();
   }
 }
