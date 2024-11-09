@@ -90,7 +90,7 @@ public class GameLoop : MonoBehaviour
     {
         Debug.Log("Recording");
         //Play Countdown
-        int recordingDuration = 5;
+        int recordingDuration = 50000;
         
         gameManager.TriggerTrialPhase(currentFrequency, recordingDuration);
         yield return new WaitForSeconds(recordingDuration + 1); //Maybe remove +1
