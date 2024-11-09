@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
     Debug.Log("DifferenceVolume: " + Math.Abs(idealVolume - actualVolume));
     calcScore = Math.Abs(idealVolume - actualVolume) / 300;
     calcScore *= 1000;
-    int score = (int)Math.Round(100 - calcScore);
+    int score = (int)Math.Round(1000 - calcScore);
     return score;
 
   }
