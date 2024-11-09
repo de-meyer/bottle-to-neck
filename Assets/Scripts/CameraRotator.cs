@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class CameraRotator : MonoBehaviour
@@ -17,6 +18,11 @@ public class CameraRotator : MonoBehaviour
         {
             transform.Rotate(0, speed * Time.deltaTime, 0);
         }
+    }
+
+    private void Start()
+    {
+        StopRotation();
     }
 
     public void StopRotation()

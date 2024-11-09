@@ -32,6 +32,12 @@ public class GameLoop : MonoBehaviour
         StartCoroutine(nameof(GameRound));
     }
 
+    public void BottleToNeck()
+    {
+        charAnimatorP2.SetBool("punch", true);
+        charAnimatorP1.SetBool("stunned", true);
+    }
+    
     public IEnumerator GameRound()
     {
         Debug.Log("In Coroutine");
