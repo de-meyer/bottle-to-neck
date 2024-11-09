@@ -64,7 +64,7 @@ public class AudioListener : MonoBehaviour
             // Get the dominant frequency
             int pitch = GetDominantFrequency();
             hzScores.Add(pitch);
-            Debug.Log("Detected Pitch: " + pitch);
+            //Debug.Log("Detected Pitch: " + pitch);
         }
     }
 
