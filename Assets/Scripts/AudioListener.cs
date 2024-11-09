@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 public class AudioListener : MonoBehaviour
 {
-    private const int FFTSize = 1024;
+    private const int FFTSize = 4096;
     private float[] samples;
     private Complex[] complexSamples;
     private string selectedDevice;
@@ -65,7 +65,7 @@ public class AudioListener : MonoBehaviour
             // Get the dominant frequency
             int pitch = GetDominantFrequency();
             hzScores.Add(pitch);
-            //Debug.Log("Detected Pitch: " + pitch);
+            Debug.Log("Detected Pitch: " + pitch);
         }
     }
 
@@ -95,7 +95,8 @@ public class AudioListener : MonoBehaviour
 
     int GetDominantFrequency()
     {
-        float freqPerBin = 44100 / FFTSize;
+        float freqPerBin = 44100 / FFTSize+0.810810811f;
+        Debug.Log("Frequency per bin " + freqPerBin);
         int maxIndex = 0;
         float maxMagnitude = 0;
 
@@ -110,6 +111,7 @@ public class AudioListener : MonoBehaviour
                 maxIndex = i;
             }
         }
+        Debug.Log("MaxIndex: " + maxIndex);
 
         int maxHz = (int)Mathf.Round(maxIndex * freqPerBin);
         return maxHz-1;
