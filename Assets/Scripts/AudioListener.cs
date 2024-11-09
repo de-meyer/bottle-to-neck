@@ -28,6 +28,7 @@ public class AudioListener : MonoBehaviour
     {
         if (selectedDevice != null)
         {
+            hzScores = new List<int>();
             audioSource.clip = Microphone.Start(selectedDevice, true, 1, 44100);
             //audioSource.Play();
             audioSource.loop = true;
