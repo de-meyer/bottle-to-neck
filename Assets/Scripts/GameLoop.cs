@@ -5,20 +5,21 @@ using TMPro;
 
 public class GameLoop : MonoBehaviour
 {
-  public enum GameState { Start, Listening, Recording, Scoring, Idle, GameOver }
-  public GameState currentState = GameState.Start;
-
+  #region variables 
+  
   [SerializeField] private Animator charAnimatorP1;
   [SerializeField] private Animator charAnimatorP2;
   [SerializeField] private GameObject startCanvas;
   [SerializeField] private GameObject gameCanvas;
+  [SerializeField] private GameObject gameOverCanvas;
   [SerializeField] private TextMeshProUGUI textfield;
   [SerializeField] private TextMeshProUGUI scoreTextfieldPlayer1;
   [SerializeField] private TextMeshProUGUI scoreTextFieldPlayer2;
 
   [SerializeField] private GameManager gameManager;
+  [SerializeField] private AudioListener audioListener;
 
-  public int currentFrequency;
+  private int currentFrequency;
   private bool player1Recorded = false;
   private bool player2Recorded = false;
   private int points1 = 0;
@@ -27,39 +28,29 @@ public class GameLoop : MonoBehaviour
   private int score2 = 0;
   private int rounds;
   private int currentRound = 0;
-
   private List<int> frequencies;
+  
+  #endregion
 
-  public void StartGame()
+  #region public methods
+  
+  public void StartNewRound()
   {
+    scoreTextfieldPlayer1.text = 0.ToString();
+    scoreTextFieldPlayer2.text = 0.ToString();
+    
     frequencies = gameManager.frequencies;
     rounds = frequencies.Count;
-    startCanvas.gameObject.SetActive(false);
-    gameCanvas.gameObject.SetActive(true);
-    StartNewRound();
-  }
 
-  public void PlayFrequencySound()
-  {
-    //PlaySound
-    StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 2));
-  }
-
-  private IEnumerator PlayAnimationAfterSeconds(string animation, int seconds)
-  {
-    yield return new WaitForSeconds(seconds);
-    charAnimatorP1.SetBool(animation, true);
-    charAnimatorP2.SetBool(animation, true);
-  }
-
-  private void StartNewRound()
-  {
-    //Check if game is finished
-    if (currentRound == rounds)
+    currentFrequency = frequencies[currentRound];
+    
+    //startCanvas.gameObject.SetActive(false);
+    //gameCanvas.gameObject.SetActive(true);
+    
+    if (currentRound == rounds) //Check if game is finished
     {
-      // TODO: calc winner within BottleToNeck
-      BottleToNeck(1);
-      return;
+      if(score1 > score2) { BottleToNeck(1); }
+      else { BottleToNeck(2); }
     }
 
     player1Recorded = false;
@@ -68,9 +59,10 @@ public class GameLoop : MonoBehaviour
     currentRound++;
   }
 
-  private void SetNewFrequency(int freq)
+  public void PlayFrequencySound()
   {
-
+    //PlaySound
+    StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 2));
   }
 
   public void StartRecording(int player)
@@ -88,6 +80,35 @@ public class GameLoop : MonoBehaviour
       default:
         break;
     }
+  }
+  
+  #endregion
+
+  #region private methods
+  
+  private void BottleToNeck(int winner)
+  {
+    if (winner == 1)
+    {
+      charAnimatorP1.SetBool("punch", true);
+      charAnimatorP2.SetBool("stunned", true);
+    }
+    else
+    {
+      charAnimatorP2.SetBool("punch", true);
+      charAnimatorP1.SetBool("stunned", true);
+    }
+  }
+  
+  #endregion
+  
+  #region Coroutines 
+  
+  private IEnumerator PlayAnimationAfterSeconds(string animation, int seconds)
+  {
+    yield return new WaitForSeconds(seconds);
+    charAnimatorP1.SetBool(animation, true);
+    charAnimatorP2.SetBool(animation, true);
   }
 
   private IEnumerator RecordAndScore(int player)
@@ -128,25 +149,5 @@ public class GameLoop : MonoBehaviour
     textfield.text = "";
   }
 
-  public void BottleToNeck(int winner)
-  {
-    charAnimatorP2.SetBool("punch", true);
-    charAnimatorP1.SetBool("stunned", true);
-  }
-
-  public IEnumerator GameRound()
-  {
-    //textfield.text = "Drink until you hit this frequency";
-
-
-
-    //charAnimator.SetBool(IsDrinking, false);
-
-    //Play sound thats needed
-    //Start timer 5 sec
-    //Record for 5 sec
-    //scoring
-
-    yield return null;
-  }
+  #endregion
 }
