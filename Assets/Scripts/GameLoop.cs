@@ -4,14 +4,11 @@ using TMPro;
 
 public class GameLoop : MonoBehaviour
 {
-
     public enum GameState { Start, Listening, Recording, Scoring, Idle, GameOver }
     public GameState currentState = GameState.Start;
 
     [SerializeField] private Animator charAnimatorP1;
     [SerializeField] private Animator charAnimatorP2;
-
-    //Todo put in one game canvas
     [SerializeField] private GameObject startCanvas;
     [SerializeField] private GameObject gameCanvas;
     [SerializeField] private TextMeshProUGUI textfield;
@@ -27,18 +24,27 @@ public class GameLoop : MonoBehaviour
     private int points2 = 0;
     private int score1 = 0;
     private int score2 = 0;
+    private int rounds;
+    private int currentRound = 0;
 
     public void StartGame()
     {
         startCanvas.gameObject.SetActive(false);
         gameCanvas.gameObject.SetActive(true);
+        StartNewRound();
     }
 
     public void PlayFrequencySound()
     {
         //PlaySound
-        charAnimatorP1.SetBool("isDrinking", true);
-        charAnimatorP2.SetBool("isDrinking", true);
+        StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 2));
+    }
+
+    private IEnumerator PlayAnimationAfterSeconds(string animation, int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        charAnimatorP1.SetBool(animation, true);
+        charAnimatorP2.SetBool(animation, true);
     }
 
     private void StartNewRound()
@@ -47,6 +53,7 @@ public class GameLoop : MonoBehaviour
         //else set new frequency
         player1Recorded = false;
         player2Recorded = false;
+        currentRound++;
     }
 
     private void SetNewFrequency(int freq)
@@ -56,30 +63,15 @@ public class GameLoop : MonoBehaviour
     
     public void StartRecording(int player)
     {
-        //StartCoroutine(nameof(GameRound));
         switch (player)
         {
             case 1:
-                if (player1Recorded)
-                {
-                    StartCoroutine(SetTextField("You already had your chance!", 3));
-                }
-                else
-                {
-                    StartCoroutine(RecordAndScore(1));
-                    
-                }
+                if (player1Recorded) { StartCoroutine(SetTextField("You already had your chance!", 3)); }
+                else { StartCoroutine(RecordAndScore(1)); }
                 break;
             case 2:
-                if (player2Recorded)
-                {
-                    StartCoroutine(SetTextField("You already had your chance!", 3));
-                }
-                else
-                {
-                    StartCoroutine(RecordAndScore(2));
-                    player2Recorded = true ;
-                }
+                if (player2Recorded) { StartCoroutine(SetTextField("You already had your chance!", 3)); }
+                else { StartCoroutine(RecordAndScore(2)); player2Recorded = true ; }
                 break;
             default:
                 break;
@@ -97,10 +89,6 @@ public class GameLoop : MonoBehaviour
         
         if      (player == 1) { points1 = gameManager.getScore(); player1Recorded = true ; } 
         else if (player == 2) { points2 = gameManager.getScore(); player2Recorded = true ;} 
-        
-        //else if(player != 1) { Debug.LogWarning("No valid player number"); yield break; }
-        
-        // Problem: if player 1 wins, player two gets same score and its a draw
         
         if (player1Recorded && player2Recorded)
         {
@@ -125,6 +113,7 @@ public class GameLoop : MonoBehaviour
     {
         textfield.text = text;
         yield return new WaitForSeconds(seconds);
+        textfield.text = "";
     }
 
     public void BottleToNeck(int winner)
