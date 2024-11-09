@@ -535,7 +535,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -949,7 +949,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicPlayer: {fileID: 391917969}
   afterMuffleSoundPercent: 50
-  trialLengthSec: 10
   audioListener: {fileID: 1432295797}
   trialLeniencyAmount: 0
   scoreDisplay: {fileID: 104175277}

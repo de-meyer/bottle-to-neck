@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int afterMuffleSoundPercent;
     [SerializeField] private AudioListener audioListener;
     [SerializeField] private int trialLeniencyAmount;
-    //[SerializeField] private int trialLeniencyFrequency;
-    [SerializeField] private Text scoreDisplay;
     [SerializeField] private AudioSource victorySoundPlayer;
 
     private int currentScore;
@@ -48,9 +46,9 @@ public class GameManager : MonoBehaviour
         }
         //int actualValue = FindKeyWithClosestValue(scoreMap, idealValue);
         int actualValue = FindKeyWithHighestValue(scoreMap);
-        Debug.Log("Closest Value: " + actualValue);
+        //Debug.Log("Closest Value: " + actualValue);
         int score = 100 - Math.Abs(idealValue-actualValue);
-        Debug.Log("Score: " + score);
+        //Debug.Log("Score: " + score);
         if (score > 0)
         {
             if (score == 100)
