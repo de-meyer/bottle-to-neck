@@ -142,6 +142,6 @@ public class GameManager : MonoBehaviour
 
         currentScore = calculateScore(audioListener.getHzScores(), idealValue);
 
-        Debug.Log("End Trigger Trial Phase");
+        Debug.Log("End Trigger Trial Phase" + currentScore);
     }
 }

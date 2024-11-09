@@ -66,8 +66,8 @@ public class GameLoop : MonoBehaviour
                 }
                 else
                 {
-                    player1Recorded = true ;
                     StartCoroutine(RecordAndScore(1));
+                    
                 }
                 break;
             case 2:
@@ -77,8 +77,8 @@ public class GameLoop : MonoBehaviour
                 }
                 else
                 {
-                    player2Recorded = true ;
                     StartCoroutine(RecordAndScore(2));
+                    player2Recorded = true ;
                 }
                 break;
             default:
@@ -90,15 +90,17 @@ public class GameLoop : MonoBehaviour
     {
         Debug.Log("Recording");
         //Play Countdown
-        int recordingDuration = 5;
+        int recordingDuration = 3;
         
         gameManager.TriggerTrialPhase(currentFrequency, recordingDuration);
         yield return new WaitForSeconds(recordingDuration + 1); //Maybe remove +1
         
-        if (player == 1) { points1 = gameManager.getScore(); } 
-        if (player == 2) { points2 = gameManager.getScore(); } 
+        if      (player == 1) { points1 = gameManager.getScore(); player1Recorded = true ; } 
+        else if (player == 2) { points2 = gameManager.getScore(); player2Recorded = true ;} 
         
-        else { Debug.LogWarning("No valid player number"); yield break; }
+        //else if(player != 1) { Debug.LogWarning("No valid player number"); yield break; }
+        
+        // Problem: if player 1 wins, player two gets same score and its a draw
         
         if (player1Recorded && player2Recorded)
         {
