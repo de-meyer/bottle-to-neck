@@ -26,9 +26,11 @@ public class GameManager : MonoBehaviour
   const int averageSipSize = 50;                               // Milliliters
   const float maxSipNoise = .25f;
 
+  public List<int> frequencies;
+
   void Start()
   {
-    List<int> frequencies = GenerateFrequencies();
+    frequencies = GenerateFrequencies();
     string log = "Frequencies: ";
     foreach (int frequency in frequencies)
     {
