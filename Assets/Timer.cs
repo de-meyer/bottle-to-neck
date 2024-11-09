@@ -8,6 +8,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
   public float duration = 3;
+  public AudioSource audioSource;
   public TextMeshProUGUI timeText;
   float timeRemaining = 3;
   public bool timerIsRunning = false;
@@ -46,7 +47,14 @@ public class Timer : MonoBehaviour
   void DisplayTime(float timeToDisplay)
   {
     int seconds = Mathf.Max(Mathf.FloorToInt(timeToDisplay), 0);
-    string text = seconds == 0 ? "*toooot*" : seconds.ToString();
-    timeText.text = text;
+    if (seconds > 0)
+    {
+      timeText.text = seconds.ToString();
+    }
+    else
+    {
+      timeText.text = "*toooot*";
+      audioSource.Play();
+    }
   }
 }
