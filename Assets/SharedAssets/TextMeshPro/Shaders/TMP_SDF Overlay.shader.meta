@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6317c4735e39a40e09343efe130dca90
+=======
+guid: 9efb2eee31c904c1d95da0d71a44b7ee
+>>>>>>> 934a79e (feat: add button to trigger drinking animation on both players)
 ShaderImporter:
   externalObjects: {}
   defaultTextures: []

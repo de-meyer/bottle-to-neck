@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 2c3028d62c21e4e71af92658eb625b1d
+=======
+guid: 6fb69d191ad854dd2b31cd6a12df22af
+>>>>>>> 934a79e (feat: add button to trigger drinking animation on both players)
 folderAsset: yes
 timeCreated: 1441876950
 licenseType: Pro

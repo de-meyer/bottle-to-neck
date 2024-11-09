@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: dc61e5317fb434fb8bb403f576f51190
+=======
+guid: b64f41ab75f8f4a1ea68a5353f38614d
+>>>>>>> 934a79e (feat: add button to trigger drinking animation on both players)
 TextScriptImporter:
   externalObjects: {}
   userData: 

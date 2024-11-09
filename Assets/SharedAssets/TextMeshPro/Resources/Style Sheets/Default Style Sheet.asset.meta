@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a5e5b4d9f97ba473aa3bdaea73ef6754
+=======
+guid: 610548d1970ee400fa28e54ea191b2a9
+>>>>>>> 934a79e (feat: add button to trigger drinking animation on both players)
 timeCreated: 1432805430
 licenseType: Store
 NativeFormatImporter:
