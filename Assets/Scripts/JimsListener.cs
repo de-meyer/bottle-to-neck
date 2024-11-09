@@ -15,20 +15,24 @@ public class JimsListener : MonoBehaviour
         if (Microphone.devices.Length > 0)
             selectedDevice = Microphone.devices[0];
 
-        StartRecording();
+        //StartRecording();
     }
 
-    void StartRecording()
+    public void StartRecording()
     {
         if (selectedDevice != null)
         {
             audioSource.clip = Microphone.Start(selectedDevice, true, 1, 44100);
-            //audioSource.Play();
             audioSource.loop = true;
 
             samples = new float[FFTSize];
             complexSamples = new Complex[FFTSize];
         }
+    }
+
+    public void StopRecording()
+    {
+        Microphone.End(selectedDevice);
     }
 
     void Update()
