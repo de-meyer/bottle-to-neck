@@ -150,7 +150,7 @@ public class GameLoop : MonoBehaviour
     if (winner == 1)
     {
       StartCoroutine(SetTextField("Congrats Player One!", 5));
-      charAnimatorP1.SetBool("punch", true);
+      charAnimatorP1.SetBool(Punch, true);
       player1RightHandBottle.SetActive(true);
       player1LeftHandBottle.SetActive(false);
       StartCoroutine(WaitForStunned(2.1f, charAnimatorP2));
@@ -159,7 +159,7 @@ public class GameLoop : MonoBehaviour
     else
     {
       StartCoroutine(SetTextField("Congrats Player Two!", 5));
-      charAnimatorP2.SetBool("punch", true);
+      charAnimatorP2.SetBool(Punch, true);
       player2RightHandBottle.SetActive(true);
       player2LeftHandBottle.SetActive(false);
       StartCoroutine(WaitForStunned(2.1f, charAnimatorP2));
@@ -184,9 +184,11 @@ public class GameLoop : MonoBehaviour
     playFrequencyButton.interactable = false;
     recordButton1.GetComponent<Button>().interactable = false;
     recordButton2.GetComponent<Button>().interactable = false;
-    yield return new WaitForSeconds(seconds);
     charAnimatorP1.SetBool(animation, true);
     charAnimatorP2.SetBool(animation, true);
+    yield return new WaitForSeconds(seconds);
+    charAnimatorP1.SetBool(animation, false);
+    charAnimatorP2.SetBool(animation, false);
     playFrequencyButton.interactable = true;
     recordButton1.GetComponent<Button>().interactable = true;
     recordButton2.GetComponent<Button>().interactable = true;
@@ -200,7 +202,7 @@ public class GameLoop : MonoBehaviour
   private IEnumerator WaitForStunned(float seconds, Animator character)
   {
     yield return new WaitForSeconds(seconds);
-    character.SetBool("stunned", true);
+    character.SetBool(Stunned, true);
   }
 
   private IEnumerator RecordAndScore(int player)
