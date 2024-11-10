@@ -96,14 +96,14 @@ public class GameLoop : MonoBehaviour
     {
       StartCoroutine(SetTextField("Congrats Player One!", 5));
       charAnimatorP1.SetBool("punch", true);
-      StartCoroutine(WaitForStunned(3, charAnimatorP2));
-      
+      StartCoroutine(WaitForStunned(2.1f, charAnimatorP2));
+
     }
     else
     {
       StartCoroutine(SetTextField("Congrats Player Two!", 5));
       charAnimatorP2.SetBool("punch", true);
-      StartCoroutine(WaitForStunned(3, charAnimatorP2));
+      StartCoroutine(WaitForStunned(2.1f, charAnimatorP2));
     }
     audioListener.PlaySound(1);
   }
@@ -134,8 +134,8 @@ public class GameLoop : MonoBehaviour
   {
     yield return new WaitForSeconds(seconds);
   }
-  
-  private IEnumerator WaitForStunned(int seconds, Animator character)
+
+  private IEnumerator WaitForStunned(float seconds, Animator character)
   {
     yield return new WaitForSeconds(seconds);
     character.SetBool("stunned", true);
