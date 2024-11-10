@@ -101,6 +101,8 @@ public class GameLoop : MonoBehaviour
       charAnimatorP1.SetBool("stunned", true);
     }
 
+    audioListener.PlaySound(1);
+    
     StartCoroutine(Wait(5));
     gameOverCanvas.SetActive(true);
     gameCanvas.SetActive(false);
