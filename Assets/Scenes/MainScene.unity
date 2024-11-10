@@ -2898,6 +2898,14 @@ PrefabInstance:
       value: Start Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1466836615}
@@ -2906,12 +2914,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1164571537}
     - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 3965798610724494984}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: StopRotation
       objectReference: {fileID: 0}
     - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: StartNewRound
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: PlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: AudioManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_IntArgument
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050040407369978316, guid: 0f5bfeef27f0ac74fae9089e34e9f17b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3440,6 +3472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df8e48fbeb944ff78cd5dcc2a9e00a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioManager: {fileID: 3965798610724494984}
   audioSource: {fileID: 653789933}
   timeText: {fileID: 1093175863}
   timerIsRunning: 0
@@ -5925,6 +5958,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b57f824672f166b008847cab3676e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: c0b30d735ba5ae849bf9b2bc6db9466a, type: 3}
+  - {fileID: 8300000, guid: ad4c4cd664f4eac63b1e0c53d34f13b3, type: 3}
+  - {fileID: 8300000, guid: 9176930da03c21a24a3525972d94d366, type: 3}
+  - {fileID: 8300000, guid: 98da6b79a0d670032a84f2a8656d1e32, type: 3}
+  - {fileID: 8300000, guid: c19f6f2eaee24b4df870e731324dff24, type: 3}
+  - {fileID: 8300000, guid: 9fbecd7c1188a490fa5a1a729313d6f1, type: 3}
+  - {fileID: 8300000, guid: e029ecf36ef99926786cb384082d9ae3, type: 3}
+  - {fileID: 8300000, guid: 7f7ada11a8bb9827e9932eb03b75fdd4, type: 3}
+  - {fileID: 8300000, guid: 9b96cb5774ea47bd0924bed4f74a6ad3, type: 3}
+  - {fileID: 8300000, guid: 3d3f1cbaa7679b5df915152c6f09cdac, type: 3}
+  - {fileID: 8300000, guid: 5e3548943daa59ff389928b34dc100f5, type: 3}
+  - {fileID: 8300000, guid: b60933311d905fdf198aa14a884ac09e, type: 3}
+  - {fileID: 8300000, guid: a01c3366c97fdd3369d80f24429445ec, type: 3}
+  - {fileID: 8300000, guid: 57af7963c2a8a2ae282347c218345004, type: 3}
+  - {fileID: 8300000, guid: 6ad58c9c955dd07789f166afe5255109, type: 3}
 --- !u!1001 &8830806547255014972
 PrefabInstance:
   m_ObjectHideFlags: 0
