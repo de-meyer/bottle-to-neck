@@ -12,7 +12,7 @@ public class GameLoop : MonoBehaviour
 
   [SerializeField] private Animator charAnimatorP1;
   [SerializeField] private Animator charAnimatorP2;
-  [SerializeField] private GameObject startCanvas;
+  //[SerializeField] private GameObject startCanvas;
   [SerializeField] private GameObject gameUI;
   [SerializeField] private GameObject recordButton1;
   [SerializeField] private GameObject recordButton2;
@@ -40,10 +40,27 @@ public class GameLoop : MonoBehaviour
 
   #region public methods
 
+  public void Restart()
+  {
+    //reset animations
+    
+    gameOverCanvas.SetActive(false);
+    gameUI.SetActive(true);
+    points1 = 0;
+    points2 = 0;
+    score1 = 0;
+    score2 = 0;
+    currentRound = 0;
+    frequencies = gameManager.GenerateFrequencies();
+    // Log all frequencies
+    rounds = frequencies.Count;
+    Debug.Log("Frequencies: " + string.Join(", ", frequencies));
+    StartNewRound();
+  }
+  
+  // ReSharper disable Unity.PerformanceAnalysis
   public void StartNewRound()
   {
-    //Todo Restart and Credits Button
-
     recordButtonText1.text = "Record";
     recordButtonText2.text = "Record";
     recordButton1.SetActive(false);
@@ -53,11 +70,6 @@ public class GameLoop : MonoBehaviour
 
     scoreTextfieldPlayer1.text = score1.ToString();
     scoreTextFieldPlayer2.text = score2.ToString();
-
-    frequencies = gameManager.frequencies;
-    // Log all frequencies
-    Debug.Log("Frequencies: " + string.Join(", ", frequencies));
-    rounds = frequencies.Count;
 
     currentFrequency = frequencies[currentRound];
 
@@ -70,7 +82,6 @@ public class GameLoop : MonoBehaviour
 
     player1Recorded = false;
     player2Recorded = false;
-    currentFrequency = frequencies[currentRound];
     currentRound++;
   }
 

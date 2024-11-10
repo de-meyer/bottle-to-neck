@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Media;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,7 +42,7 @@ public class GameManager : MonoBehaviour
       StartCoroutine(decreaseMusicVolume(volumeDecreasePercent, seconds));
   }
 
-  List<int> GenerateFrequencies()
+  public List<int> GenerateFrequencies()
   {
     int bottleLevel = maxBottleLevel;
 
