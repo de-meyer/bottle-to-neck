@@ -47,18 +47,14 @@ public class Timer : MonoBehaviour
     if (timeCounter == 0)
     {
       Debug.Log("Stopping Timer");
+      timeText.text = string.Empty;
       CancelInvoke("DisplayTime");
       return;
     }
-    audioManager.PlaySound(10+timeCounter);
-    if (timeCounter > 0)
-    {
-      timeText.text = timeCounter.ToString();
-    }
-    else
-    {
-      timeText.text = string.Empty;
-    }
+
+    timeText.text = timeCounter.ToString();
+    audioManager.PlaySound(10 + timeCounter);
+
     timeCounter--;
   }
 
