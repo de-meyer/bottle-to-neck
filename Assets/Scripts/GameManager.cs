@@ -265,7 +265,7 @@ public class GameManager : MonoBehaviour
     float oldVolume = musicPlayer.volume;
 
     // Adjust the volume based on afterMuffleSoundPercent
-    musicPlayer.volume *= (100 - volumeDecreasePercent) / 100;
+    musicPlayer.volume = (100 - volumeDecreasePercent) / 100f;
 
     // Start recording
     audioListener.StartRecording();

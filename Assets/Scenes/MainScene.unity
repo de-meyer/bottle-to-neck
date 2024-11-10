@@ -3898,7 +3898,7 @@ MonoBehaviour:
   recordButtonText1: {fileID: 1866518925}
   recordButtonText2: {fileID: 116794422}
   gameManager: {fileID: 1164571536}
-  audioListener: {fileID: 0}
+  audioListener: {fileID: 3965798610724494984}
   currentRound: 0
 --- !u!1 &1233472292
 GameObject:
@@ -4253,30 +4253,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1164571537}
-        m_TargetAssemblyTypeName: GameLoop, Assembly-CSharp
-        m_MethodName: PlayFrequencySound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 300
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1093175862}
-        m_TargetAssemblyTypeName: Timer, Assembly-CSharp
-        m_MethodName: StartTimer
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1238907803}
         m_TargetAssemblyTypeName: ScreenSwitcher, Assembly-CSharp
         m_MethodName: SwitchScreen
