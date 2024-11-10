@@ -40,6 +40,8 @@ public class GameLoop : MonoBehaviour
   
   public void StartNewRound()
   {
+    //Todo Restart and Credits Button
+    
     timer.currentRound = currentRound;
     recordButtonText1.text = "Record";
     recordButtonText2.text = "Record";
