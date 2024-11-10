@@ -14,11 +14,9 @@ public class Timer : MonoBehaviour
 
   [SerializeField] private Animator uiAnimation;
 
-  //List<int> sips = new List<int>();
-  // const float frequencyWhenFull = 1376;                     // Hertz
   const float frequencyWhenEmpty = 172;                        // Hertz
 
-  public List<float> frequencies = new List<float> { 172, 344, 516, 688, 860, 1032, 1204, 1376 };
+  [SerializeField] private GameManager gameManager;
   private static readonly int IsRunning = Animator.StringToHash("isRunning");
 
   public void StartTimer()
@@ -30,7 +28,7 @@ public class Timer : MonoBehaviour
     timeText.text = duration.ToString();
 
     // translate frequency to pitch
-    foreach (float frequency in frequencies)
+    foreach (float frequency in gameManager.frequencies)
     {
       // random pitch between 1 and 8
       float pitch = frequency / frequencyWhenEmpty;

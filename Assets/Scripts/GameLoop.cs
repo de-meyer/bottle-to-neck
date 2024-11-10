@@ -7,7 +7,7 @@ using TMPro;
 public class GameLoop : MonoBehaviour
 {
   #region variables 
-  
+
   [SerializeField] private Animator charAnimatorP1;
   [SerializeField] private Animator charAnimatorP2;
   [SerializeField] private GameObject startCanvas;
@@ -19,9 +19,9 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private TextMeshProUGUI recordButtonText1;
   [SerializeField] private TextMeshProUGUI recordButtonText2;
 
-  [SerializeField] private Timer timer; 
+  [SerializeField] private Timer timer;
   [SerializeField] private GameManager gameManager;
-  [SerializeField] private AudioManager audioListener; 
+  [SerializeField] private AudioManager audioListener;
 
   private int currentFrequency;
   private bool player1Recorded = false;
@@ -33,29 +33,31 @@ public class GameLoop : MonoBehaviour
   private int rounds;
   private int currentRound = 0;
   private List<int> frequencies;
-  
+
   #endregion
 
   #region public methods
-  
+
   public void StartNewRound()
   {
     //Todo Restart and Credits Button
-    
+
     timer.currentRound = currentRound;
     recordButtonText1.text = "Record";
     recordButtonText2.text = "Record";
     scoreTextfieldPlayer1.text = score1.ToString();
     scoreTextFieldPlayer2.text = score2.ToString();
-    
+
     frequencies = gameManager.frequencies;
+    // Log all frequencies
+    Debug.Log("Frequencies: " + string.Join(", ", frequencies));
     rounds = frequencies.Count;
 
     currentFrequency = frequencies[currentRound];
-    
+
     if (currentRound == rounds - 1) //Check if game is finished
     {
-      if(score1 > score2) { BottleToNeck(1); }
+      if (score1 > score2) { BottleToNeck(1); }
       else { BottleToNeck(2); }
       return;
     }
@@ -87,7 +89,7 @@ public class GameLoop : MonoBehaviour
         break;
     }
   }
-  
+
   public void BottleToNeck(int winner)
   {
     gameUI.gameObject.SetActive(false);
@@ -106,11 +108,11 @@ public class GameLoop : MonoBehaviour
     }
     audioListener.PlaySound(1);
   }
-  
+
   #endregion
-  
+
   #region Coroutines 
-  
+
   private IEnumerator PlayAnimationAfterSeconds(string animation, int seconds)
   {
     yield return new WaitForSeconds(seconds);
@@ -153,7 +155,7 @@ public class GameLoop : MonoBehaviour
       if (points2 == points1) { StartCoroutine(SetTextField("Draw!", 5)); }
 
       yield return new WaitForSeconds(5);
-      
+
       score1 += points1;
       score2 += points2;
       scoreTextfieldPlayer1.text = score1.ToString();
