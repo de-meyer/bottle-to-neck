@@ -48,6 +48,7 @@ public class Timer : MonoBehaviour
     {
       Debug.Log("Stopping Timer");
       timeText.text = string.Empty;
+      PlayPitchedBottleBlowSound();
       CancelInvoke("DisplayTime");
       return;
     }
@@ -58,7 +59,7 @@ public class Timer : MonoBehaviour
     timeCounter--;
   }
 
-  private void PlaySound()
+  private void PlayPitchedBottleBlowSound()
   {
     // 1f   pitch results in   172Hz
     // // 7.2f pitch results in 1.375Hz (only by testing not by math)
