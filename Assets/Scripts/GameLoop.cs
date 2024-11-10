@@ -17,6 +17,8 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private GameObject recordButton1;
   [SerializeField] private GameObject recordButton2;
   [SerializeField] private GameObject gameOverCanvas;
+  [SerializeField] private Button playFrequencyButton;
+
   [SerializeField] private TextMeshProUGUI textfield;
   [SerializeField] private TextMeshProUGUI scoreTextfieldPlayer1;
   [SerializeField] private TextMeshProUGUI scoreTextFieldPlayer2;
@@ -93,6 +95,7 @@ public class GameLoop : MonoBehaviour
   public void PlayFrequencySound()
   {
     StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 5));
+
     if (!player1Recorded && !player2Recorded)
     {
       recordButton1.SetActive(true);
@@ -169,12 +172,15 @@ public class GameLoop : MonoBehaviour
 
   private IEnumerator PlayAnimationAfterSeconds(string animation, int seconds)
   {
+    playFrequencyButton.interactable = false;
+    recordButton1.GetComponent<Button>().interactable = false;
+    recordButton2.GetComponent<Button>().interactable = false;
     yield return new WaitForSeconds(seconds);
     charAnimatorP1.SetBool(animation, true);
     charAnimatorP2.SetBool(animation, true);
-    yield return new WaitForSeconds(3);
-    charAnimatorP1.SetBool(animation, false);
-    charAnimatorP2.SetBool(animation, false);
+    playFrequencyButton.interactable = true;
+    recordButton1.GetComponent<Button>().interactable = true;
+    recordButton2.GetComponent<Button>().interactable = true;
   }
 
   private IEnumerator Wait(int seconds)

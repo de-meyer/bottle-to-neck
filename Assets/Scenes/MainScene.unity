@@ -3901,6 +3901,7 @@ MonoBehaviour:
   recordButton1: {fileID: 1766758350}
   recordButton2: {fileID: 99452221}
   gameOverCanvas: {fileID: 104205200}
+  playFrequencyButton: {fileID: 1583672044}
   textfield: {fileID: 241561859}
   scoreTextfieldPlayer1: {fileID: 214406799}
   scoreTextFieldPlayer2: {fileID: 658135726}
