@@ -1469,8 +1469,8 @@ RectTransform:
   m_Children:
   - {fileID: 1905659648}
   - {fileID: 104205203}
-  - {fileID: 1935690135}
   - {fileID: 241561858}
+  - {fileID: 1935690135}
   - {fileID: 871920502}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3889,6 +3889,8 @@ MonoBehaviour:
   charAnimatorP2: {fileID: 114675598}
   startCanvas: {fileID: 8012740062575837339}
   gameUI: {fileID: 1935690134}
+  recordButton1: {fileID: 1766758350}
+  recordButton2: {fileID: 99452221}
   gameOverCanvas: {fileID: 104205200}
   textfield: {fileID: 241561859}
   scoreTextfieldPlayer1: {fileID: 214406799}
