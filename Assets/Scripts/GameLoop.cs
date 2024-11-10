@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
+using UnityEngine.UI;
 
 public class GameLoop : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private Animator charAnimatorP2;
   [SerializeField] private GameObject startCanvas;
   [SerializeField] private GameObject gameUI;
+  [SerializeField] private GameObject recordButton1;
+  [SerializeField] private GameObject recordButton2;
   [SerializeField] private GameObject gameOverCanvas;
   [SerializeField] private TextMeshProUGUI textfield;
   [SerializeField] private TextMeshProUGUI scoreTextfieldPlayer1;
@@ -43,6 +46,11 @@ public class GameLoop : MonoBehaviour
 
     recordButtonText1.text = "Record";
     recordButtonText2.text = "Record";
+    recordButton1.SetActive(false);
+    recordButton2.SetActive(false);
+    recordButton1.GetComponent<Button>().interactable = true;
+    recordButton2.GetComponent<Button>().interactable = true;
+
     scoreTextfieldPlayer1.text = score1.ToString();
     scoreTextFieldPlayer2.text = score2.ToString();
 
@@ -69,6 +77,11 @@ public class GameLoop : MonoBehaviour
   public void PlayFrequencySound()
   {
     StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 5));
+    if (!player1Recorded && !player2Recorded)
+    {
+      recordButton1.SetActive(true);
+      recordButton2.SetActive(true);
+    }
   }
 
   public void StartRecording(int player)
@@ -76,12 +89,26 @@ public class GameLoop : MonoBehaviour
     switch (player)
     {
       case 1:
-        if (player1Recorded) { StartCoroutine(SetTextField("You already had your chance!", 3)); }
-        else { StartCoroutine(RecordAndScore(1)); }
+        if (player1Recorded)
+        {
+          StartCoroutine(SetTextField("You already had your chance!", 3));
+        }
+        else
+        {
+          StartCoroutine(RecordAndScore(1));
+          recordButton1.GetComponent<Button>().interactable = false;
+        }
         break;
       case 2:
-        if (player2Recorded) { StartCoroutine(SetTextField("You already had your chance!", 3)); }
-        else { StartCoroutine(RecordAndScore(2)); player2Recorded = true; }
+        if (player2Recorded)
+        {
+          StartCoroutine(SetTextField("You already had your chance!", 3));
+        }
+        else
+        {
+          StartCoroutine(RecordAndScore(2)); player2Recorded = true;
+          recordButton2.GetComponent<Button>().interactable = false;
+        }
         break;
       default:
         break;
