@@ -25,6 +25,11 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private GameManager gameManager;
   [SerializeField] private AudioManager audioListener;
 
+  [SerializeField] private GameObject player1LeftHandBottle;
+  [SerializeField] private GameObject player1RightHandBottle;
+  [SerializeField] private GameObject player2LeftHandBottle;
+  [SerializeField] private GameObject player2RightHandBottle;
+
   private int currentFrequency;
   private bool player1Recorded = false;
   private bool player2Recorded = false;
@@ -43,7 +48,7 @@ public class GameLoop : MonoBehaviour
   public void Restart()
   {
     //reset animations
-    
+
     gameOverCanvas.SetActive(false);
     gameUI.SetActive(true);
     points1 = 0;
@@ -57,7 +62,7 @@ public class GameLoop : MonoBehaviour
     Debug.Log("Frequencies: " + string.Join(", ", frequencies));
     StartNewRound();
   }
-  
+
   // ReSharper disable Unity.PerformanceAnalysis
   public void StartNewRound()
   {
@@ -134,6 +139,8 @@ public class GameLoop : MonoBehaviour
     {
       StartCoroutine(SetTextField("Congrats Player One!", 5));
       charAnimatorP1.SetBool("punch", true);
+      player1RightHandBottle.SetActive(true);
+      player1LeftHandBottle.SetActive(false);
       StartCoroutine(WaitForStunned(2.1f, charAnimatorP2));
 
     }
@@ -141,6 +148,8 @@ public class GameLoop : MonoBehaviour
     {
       StartCoroutine(SetTextField("Congrats Player Two!", 5));
       charAnimatorP2.SetBool("punch", true);
+      player2RightHandBottle.SetActive(true);
+      player2LeftHandBottle.SetActive(false);
       StartCoroutine(WaitForStunned(2.1f, charAnimatorP2));
     }
     audioListener.PlaySound(1);
