@@ -10,6 +10,7 @@ public class CameraRotator : MonoBehaviour
     Vector3 fixedRotation = new Vector3(0, 0, 0);
 
     [SerializeField] GameObject panel;
+    [SerializeField] GameObject gamePanel;
 
     // Update is called once per frame
     void Update()
@@ -20,9 +21,12 @@ public class CameraRotator : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
-        StopRotation();
+        if (gamePanel != null)
+        {
+            gamePanel.SetActive(false);
+        }
     }
 
     public void StopRotation()
@@ -34,6 +38,7 @@ public class CameraRotator : MonoBehaviour
         if (panel != null)
         {
             panel.SetActive(false); // deactivate panel
+            gamePanel.SetActive(true);
         }
         else
         {
