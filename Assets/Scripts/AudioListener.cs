@@ -43,6 +43,11 @@ public class AudioListener : MonoBehaviour
         return hzScores;
     }
 
+    public float getFFTBinSize()
+    {
+        return 44100 / FFTSize+0.810810811f;
+    }
+
     void Update()
     {
         if (Microphone.IsRecording(selectedDevice))
@@ -96,7 +101,7 @@ public class AudioListener : MonoBehaviour
 
     int GetDominantFrequency()
     {
-        float freqPerBin = 44100 / FFTSize+0.810810811f;
+        float freqPerBin = getFFTBinSize();
         //Debug.Log("Frequency per bin " + freqPerBin);
         int maxIndex = 0;
         float maxMagnitude = 0;
