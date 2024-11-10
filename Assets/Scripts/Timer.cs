@@ -9,41 +9,33 @@ public class Timer : MonoBehaviour
   public bool timerIsRunning = false;
   public float duration = 3;
   float timeRemaining;
+  List<float> pitches = new List<float>();
+  public int currentRound;
 
   [SerializeField] private Animator uiAnimation;
 
-  List<int> sips = new List<int>();
+  //List<int> sips = new List<int>();
   // const float frequencyWhenFull = 1376;                     // Hertz
   const float frequencyWhenEmpty = 172;                        // Hertz
 
   public List<float> frequencies = new List<float> { 172, 344, 516, 688, 860, 1032, 1204, 1376 };
+  private static readonly int IsRunning = Animator.StringToHash("isRunning");
 
   public void StartTimer()
   {
     // Starts the timer automatically
-    Debug.Log("Timer with duration of " + duration + "s started.");
-    uiAnimation.enabled = true;
-    uiAnimation.Play("CountdownAnim", 0, 0f);
+    uiAnimation.SetBool(IsRunning, true);
     timerIsRunning = true;
     timeRemaining = duration;
     timeText.text = duration.ToString();
 
     // translate frequency to pitch
-    List<float> pitches = new List<float>();
     foreach (float frequency in frequencies)
     {
       // random pitch between 1 and 8
       float pitch = frequency / frequencyWhenEmpty;
       pitches.Add(pitch);
     }
-
-    // log pitches
-    string log = "Pitches: ";
-    foreach (float pitch in pitches)
-    {
-      log += pitch + ", ";
-    }
-    Debug.Log(log);
   }
 
   void Update()
@@ -60,7 +52,8 @@ public class Timer : MonoBehaviour
         }
         if (timeRemaining <= 0)
         {
-          PlaySound();
+          uiAnimation.SetBool(IsRunning, false);
+          PlaySound(currentRound);
         }
       }
       else
@@ -85,15 +78,14 @@ public class Timer : MonoBehaviour
     }
   }
 
-  void PlaySound()
+  private void PlaySound(int index)
   {
     // 1f   pitch results in   172Hz
     // // 7.2f pitch results in 1.375Hz (only by testing not by math)
     // 18   pitch results in 1.376Hz
 
-    float randomPitch = 1;
-    audioSource.pitch = randomPitch;
-    Debug.Log("Pitch set to " + randomPitch);
+    audioSource.pitch = pitches[index];
+    Debug.Log("Pitch set to " + pitches[index]);
     audioSource.Play();
   }
 }

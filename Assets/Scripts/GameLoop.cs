@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,10 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private TextMeshProUGUI textfield;
   [SerializeField] private TextMeshProUGUI scoreTextfieldPlayer1;
   [SerializeField] private TextMeshProUGUI scoreTextFieldPlayer2;
+  [SerializeField] private TextMeshProUGUI recordButtonText1;
+  [SerializeField] private TextMeshProUGUI recordButtonText2;
 
+  [SerializeField] private Timer timer; 
   [SerializeField] private GameManager gameManager;
   [SerializeField] private AudioManager audioListener; 
 
@@ -36,21 +40,22 @@ public class GameLoop : MonoBehaviour
   
   public void StartNewRound()
   {
-    scoreTextfieldPlayer1.text = 0.ToString();
-    scoreTextFieldPlayer2.text = 0.ToString();
+    timer.currentRound = currentRound;
+    recordButtonText1.text = "Record";
+    recordButtonText2.text = "Record";
+    scoreTextfieldPlayer1.text = score1.ToString();
+    scoreTextFieldPlayer2.text = score2.ToString();
     
     frequencies = gameManager.frequencies;
     rounds = frequencies.Count;
 
     currentFrequency = frequencies[currentRound];
     
-    //startCanvas.gameObject.SetActive(false);
-    //gameCanvas.gameObject.SetActive(true);
-    
-    if (currentRound == rounds) //Check if game is finished
+    if (currentRound == rounds - 1) //Check if game is finished
     {
       if(score1 > score2) { BottleToNeck(1); }
       else { BottleToNeck(2); }
+      return;
     }
 
     player1Recorded = false;
@@ -61,8 +66,7 @@ public class GameLoop : MonoBehaviour
 
   public void PlayFrequencySound()
   {
-    //PlaySound
-    StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 2));
+    StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 0));
   }
 
   public void StartRecording(int player)
@@ -86,11 +90,13 @@ public class GameLoop : MonoBehaviour
   {
     if (winner == 1)
     {
+      StartCoroutine(SetTextField("Congrats Player One!", 3));
       charAnimatorP1.SetBool("punch", true);
       charAnimatorP2.SetBool("stunned", true);
     }
     else
     {
+      StartCoroutine(SetTextField("Congrats Player Two!", 3));
       charAnimatorP2.SetBool("punch", true);
       charAnimatorP1.SetBool("stunned", true);
     }
@@ -109,6 +115,9 @@ public class GameLoop : MonoBehaviour
     yield return new WaitForSeconds(seconds);
     charAnimatorP1.SetBool(animation, true);
     charAnimatorP2.SetBool(animation, true);
+    yield return new WaitForSeconds(3);
+    charAnimatorP1.SetBool(animation, false);
+    charAnimatorP2.SetBool(animation, false);
   }
 
   private IEnumerator Wait(int seconds)
@@ -118,15 +127,23 @@ public class GameLoop : MonoBehaviour
 
   private IEnumerator RecordAndScore(int player)
   {
-    Debug.Log("Recording");
-    //Play Countdown
+    StartCoroutine(SetTextField("Recording...", 3));
     int recordingDuration = 3;
 
     gameManager.TriggerTrialPhase(currentFrequency, recordingDuration);
-    yield return new WaitForSeconds(recordingDuration + 1); //Maybe remove +1
+    yield return new WaitForSeconds(recordingDuration);
 
-    if (player == 1) { points1 = gameManager.getScore(); player1Recorded = true; }
-    else if (player == 2) { points2 = gameManager.getScore(); player2Recorded = true; }
+    if (player == 1)
+    {
+      points1 = gameManager.getScore(); player1Recorded = true;
+      recordButtonText1.text = points1.ToString();
+    }
+
+    if (player == 2)
+    {
+      points2 = gameManager.getScore(); player2Recorded = true;
+      recordButtonText2.text = points2.ToString();
+    }
 
     if (player1Recorded && player2Recorded)
     {
@@ -134,6 +151,8 @@ public class GameLoop : MonoBehaviour
       if (points2 > points1) { StartCoroutine(SetTextField("Player Two was closer and wins this round", 5)); }
       if (points2 == points1) { StartCoroutine(SetTextField("Draw!", 5)); }
 
+      yield return new WaitForSeconds(5);
+      
       score1 += points1;
       score2 += points2;
       scoreTextfieldPlayer1.text = score1.ToString();
