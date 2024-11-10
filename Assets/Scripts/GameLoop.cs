@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditor;
 
 public class GameLoop : MonoBehaviour
 {
@@ -105,6 +106,14 @@ public class GameLoop : MonoBehaviour
       StartCoroutine(WaitForStunned(3, charAnimatorP2));
     }
     audioListener.PlaySound(1);
+  }
+
+  public void CloseApplication()
+  {
+    #if UNITY_EDITOR
+    EditorApplication.isPlaying = false;
+    #endif
+    Application.Quit();
   }
 
   #endregion
