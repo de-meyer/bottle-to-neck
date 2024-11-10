@@ -11,7 +11,7 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private Animator charAnimatorP1;
   [SerializeField] private Animator charAnimatorP2;
   [SerializeField] private GameObject startCanvas;
-  [SerializeField] private GameObject gameCanvas;
+  [SerializeField] private GameObject gameUI;
   [SerializeField] private GameObject gameOverCanvas;
   [SerializeField] private TextMeshProUGUI textfield;
   [SerializeField] private TextMeshProUGUI scoreTextfieldPlayer1;
@@ -88,24 +88,21 @@ public class GameLoop : MonoBehaviour
   
   public void BottleToNeck(int winner)
   {
+    gameUI.gameObject.SetActive(false);
+    gameOverCanvas.SetActive(true);
     if (winner == 1)
     {
-      StartCoroutine(SetTextField("Congrats Player One!", 3));
+      StartCoroutine(SetTextField("Congrats Player One!", 5));
       charAnimatorP1.SetBool("punch", true);
       charAnimatorP2.SetBool("stunned", true);
     }
     else
     {
-      StartCoroutine(SetTextField("Congrats Player Two!", 3));
+      StartCoroutine(SetTextField("Congrats Player Two!", 5));
       charAnimatorP2.SetBool("punch", true);
       charAnimatorP1.SetBool("stunned", true);
     }
-
     audioListener.PlaySound(1);
-    
-    StartCoroutine(Wait(5));
-    gameOverCanvas.SetActive(true);
-    gameCanvas.SetActive(false);
   }
   
   #endregion
