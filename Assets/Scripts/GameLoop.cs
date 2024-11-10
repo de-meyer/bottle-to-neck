@@ -68,7 +68,7 @@ public class GameLoop : MonoBehaviour
 
   public void PlayFrequencySound()
   {
-    StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 0));
+    StartCoroutine(PlayAnimationAfterSeconds("isDrinking", 5));
   }
 
   public void StartRecording(int player)
@@ -110,9 +110,9 @@ public class GameLoop : MonoBehaviour
 
   public void CloseApplication()
   {
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     EditorApplication.isPlaying = false;
-    #endif
+#endif
     Application.Quit();
   }
 
