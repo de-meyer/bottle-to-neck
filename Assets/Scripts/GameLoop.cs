@@ -42,6 +42,8 @@ public class GameLoop : MonoBehaviour
   private int rounds;
   public int currentRound = 0;
   private List<int> frequencies;
+  private static readonly int Punch = Animator.StringToHash("punch");
+  private static readonly int Stunned = Animator.StringToHash("stunned");
 
   #endregion
 
@@ -49,7 +51,14 @@ public class GameLoop : MonoBehaviour
 
   public void Restart()
   {
-    //reset animations
+    charAnimatorP1.SetBool(Punch, false);
+    charAnimatorP2.SetBool(Punch, false);
+    charAnimatorP1.SetBool(Stunned, false);
+    charAnimatorP2.SetBool(Stunned, false);
+    player1LeftHandBottle.SetActive(true);
+    player2LeftHandBottle.SetActive(true);
+    player1RightHandBottle.SetActive(false);
+    player2RightHandBottle.SetActive(false);
 
     gameOverCanvas.SetActive(false);
     gameUI.SetActive(true);
