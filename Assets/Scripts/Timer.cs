@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Data;
 
 public class Timer : MonoBehaviour
 {
@@ -8,8 +9,9 @@ public class Timer : MonoBehaviour
   public AudioSource audioSource;
   public TextMeshProUGUI timeText;
   public bool timerIsRunning = false;
-  public float duration = 3;
-  float timeRemaining;
+  public int duration = 3;
+  int timeCounter;
+
   List<float> pitches = new List<float>();
   [SerializeField] private GameLoop gameLoop;
 
@@ -25,7 +27,7 @@ public class Timer : MonoBehaviour
     // Starts the timer automatically
     uiAnimation.SetBool(IsRunning, true);
     timerIsRunning = true;
-    timeRemaining = duration;
+    timeCounter = duration;
     timeText.text = duration.ToString();
 
     // translate frequency to pitch
@@ -35,47 +37,29 @@ public class Timer : MonoBehaviour
       float pitch = frequency / frequencyWhenEmpty;
       pitches.Add(pitch);
     }
+    InvokeRepeating("DisplayTime", 0, 1);
   }
 
-  void Update()
+
+  void DisplayTime()
   {
-    if (timerIsRunning)
+    Debug.Log("seconds: " + timeCounter);
+    if (timeCounter == 0)
     {
-      if (timeRemaining > 0)
-      {
-        timeRemaining -= Time.deltaTime;
-        // update text mash input each full second
-        if (timeRemaining % 1 < Time.deltaTime)
-        {
-          DisplayTime(timeRemaining);
-        }
-        if (timeRemaining <= 0)
-        {
-          uiAnimation.SetBool(IsRunning, false);
-          PlaySound();
-        }
-      }
-      else
-      {
-        Debug.Log("Time has run out!");
-        timeRemaining = 0;
-        timerIsRunning = false;
-      }
+      Debug.Log("Stopping Timer");
+      CancelInvoke("DisplayTime");
+      return;
     }
-  }
-
-  void DisplayTime(float timeToDisplay)
-  {
-    int seconds = Mathf.Max(Mathf.FloorToInt(timeToDisplay), 0);
-    audioManager.PlaySound(10+seconds);
-    if (seconds > 0)
+    audioManager.PlaySound(10+timeCounter);
+    if (timeCounter > 0)
     {
-      timeText.text = seconds.ToString();
+      timeText.text = timeCounter.ToString();
     }
     else
     {
       timeText.text = string.Empty;
     }
+    timeCounter--;
   }
 
   private void PlaySound()
