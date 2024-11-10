@@ -1,14 +1,18 @@
 using UnityEngine;
-
+using System;
 using UnityEngine;
 
    public class AudioManager : MonoBehaviour
    {
+        private int volumePercent = 1;
+        private bool varee = true;
        [SerializeField] private AudioSource audioSource;   // Reference to the AudioSource component
        [SerializeField] private AudioClip[] audioClips;    // Array to hold different AudioClips
+       private System.Random random;
 
        void Start()
        {
+            random = new System.Random();
            if (audioSource == null)
            {
                audioSource = GetComponent<AudioSource>();
@@ -16,12 +20,21 @@ using UnityEngine;
        }
 
        // Method to play a specific sound by index
-       public void PlaySound(int index)
+       public void PlayVareedSound(int index)
        {
+            audioSource.volume = 1;
            if (index >= 0 && index < audioClips.Length)
            {
-               audioSource.clip = audioClips[index];
-               audioSource.Play();
+                if (varee)
+                {
+                    audioSource.pitch = 1;
+                    float offset = (float)random.NextDouble()/8;
+                    offset *= random.Next(2) * 2 - 1;
+                    audioSource.pitch += offset;
+                }
+                audioSource.volume = 100 / volumePercent;
+                audioSource.clip = audioClips[index];
+                audioSource.Play();
            }
            else
            {
@@ -29,11 +42,18 @@ using UnityEngine;
            }
        }
 
-       // Example method to play a random sound
-       public void PlayRandomSound()
-       {
-           int randomIndex = Random.Range(0, audioClips.Length);
-           PlaySound(randomIndex);
-       }
+        public void PlaySound(int index)
+        {
+            audioSource.volume = 1;
+            if (index >= 0 && index < audioClips.Length)
+            {
+                audioSource.clip = audioClips[index];
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("Index out of range. Cannot play sound.");
+            }
+        }
    }
 

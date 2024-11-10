@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
   [SerializeField] private AudioSource musicPlayer;
-  [SerializeField] private int afterMuffleSoundPercent;
+  [SerializeField] private int MuffleSoundPercent;
   [SerializeField] private AudioListener audioListener;
   [SerializeField] private int trialLeniencyAmount;
   [SerializeField] private AudioSource victorySoundPlayer;
@@ -38,6 +38,11 @@ public class GameManager : MonoBehaviour
       log += frequency + ", ";
     }
     Debug.Log(log);
+  }
+
+  public void decreaseMusicVolumeByFor(int volumeDecreasePercent, int seconds)
+  {
+      StartCoroutine(decreaseMusicVolume(volumeDecreasePercent, seconds));
   }
 
   List<int> GenerateFrequencies()
@@ -124,7 +129,7 @@ public class GameManager : MonoBehaviour
   */
   public void TriggerTrialPhase(int idealValue, int recLenghInSec)
   {
-    Debug.Log("StartedTrialPhase");
+    Debug.Log("StartedTrialPhase aiming for: " + idealValue);
     StartCoroutine(TrialPhaseCoroutine(idealValue, recLenghInSec));
   }
 
@@ -136,15 +141,15 @@ public class GameManager : MonoBehaviour
   private int calculateScore(List<int> hzScores, int idealValue)
   {
     Dictionary<int, int> scoreMap = new Dictionary<int, int>();
-    foreach (int number in hzScores)
+    foreach (int freq in hzScores)
     {
-      if (!scoreMap.ContainsKey(number))
+      if (!scoreMap.ContainsKey(freq))
       {
-        scoreMap.Add(number, 1);
+        scoreMap.Add(freq, 1);
       }
       else
       {
-        scoreMap[number] += 1;
+        scoreMap[freq] += 1;
       }
     }
     //int actualValue = FindKeyWithClosestValue(scoreMap, idealValue);
@@ -153,18 +158,32 @@ public class GameManager : MonoBehaviour
     float idealVolume = TranslateFrequencyToVolume(idealValue);
     float actualVolume = TranslateFrequencyToVolume(actualValue);
     float calcScore = 0f;
-    Debug.Log("DifferenceVolume: " + Math.Abs(idealVolume - actualVolume));
+    //Debug.Log("Freqtarget: " + Math.Abs(idealValue));
+    //Debug.Log("FreqHit: " + Math.Abs(actualValue));
+    //Debug.Log("DifferenceVolume: " + Math.Abs(idealVolume - actualVolume));
     calcScore = Math.Abs(idealVolume - actualVolume) / 300;
+    //Debug.Log("Calc Score before mult;" + calcScore);
     calcScore *= 1000;
+    //Debug.Log("CalcScore: " + calcScore);
     int score = (int)Math.Round(1000 - calcScore);
+    if(score == 1000)
+    {
+      playVictorySound(idealValue);
+    }
     return score;
 
   }
 
   void playVictorySound(int goalPitch)
   {
-    Debug.Log("Victoryyyyy " + 233.0f / goalPitch);
-    victorySoundPlayer.pitch = 233.0f / goalPitch;
+    float pitchChange = 0f;
+    if(goalPitch != 0)
+    {
+      pitchChange =  goalPitch / 233.0f;
+    }
+    
+    Debug.Log("Victoryyyyy " + goalPitch / 233.0f);
+    victorySoundPlayer.pitch = pitchChange;
     victorySoundPlayer.Play();
   }
 
@@ -228,13 +247,7 @@ public class GameManager : MonoBehaviour
   private IEnumerator TrialPhaseCoroutine(int idealValue, int recLenghInSec)
   {
     Debug.Log("Trigger Trial Phase");
-    float oldVolume = musicPlayer.volume;
-
-    // Adjust the volume based on afterMuffleSoundPercent
-    musicPlayer.volume *= 100f / afterMuffleSoundPercent;
-
-    // Set volume to 0.5 as per earlier logic
-    musicPlayer.volume = 0.5f;
+    decreaseMusicVolumeByFor(MuffleSoundPercent, recLenghInSec);
 
     // Start recording
     audioListener.StartRecording();
@@ -242,14 +255,28 @@ public class GameManager : MonoBehaviour
     // Wait for trialLengthSec seconds
     yield return new WaitForSeconds(recLenghInSec);
 
-    // Restore the old volume
-    musicPlayer.volume = oldVolume;
-
     // Stop recording
     audioListener.StopRecording();
 
     currentScore = calculateScore(audioListener.getHzScores(), idealValue);
 
     Debug.Log("End Trigger Trial Phase " + currentScore);
+  }
+
+  private IEnumerator decreaseMusicVolume(int volumeDecreasePercent, int lenghInSec)
+  {
+    float oldVolume = musicPlayer.volume;
+
+    // Adjust the volume based on afterMuffleSoundPercent
+    musicPlayer.volume *= (100 - volumeDecreasePercent) / 100;
+
+    // Start recording
+    audioListener.StartRecording();
+
+    // Wait for trialLengthSec seconds
+    yield return new WaitForSeconds(lenghInSec);
+
+    // Restore the old volume
+    musicPlayer.volume = oldVolume;
   }
 }

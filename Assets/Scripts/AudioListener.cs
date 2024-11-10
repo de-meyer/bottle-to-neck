@@ -115,7 +115,7 @@ public class AudioListener : MonoBehaviour
         //Debug.Log("MaxIndex: " + maxIndex);
 
         int maxHz = (int)Mathf.Round(maxIndex * freqPerBin);
-        return maxHz-1;
+        return maxHz;
     }
 
     public struct Complex
