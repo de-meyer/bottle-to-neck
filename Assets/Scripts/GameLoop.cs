@@ -18,8 +18,6 @@ public class GameLoop : MonoBehaviour
   [SerializeField] private TextMeshProUGUI scoreTextFieldPlayer2;
   [SerializeField] private TextMeshProUGUI recordButtonText1;
   [SerializeField] private TextMeshProUGUI recordButtonText2;
-
-  [SerializeField] private Timer timer;
   [SerializeField] private GameManager gameManager;
   [SerializeField] private AudioManager audioListener;
 
@@ -31,7 +29,7 @@ public class GameLoop : MonoBehaviour
   private int score1 = 0;
   private int score2 = 0;
   private int rounds;
-  private int currentRound = 0;
+  public int currentRound = 0;
   private List<int> frequencies;
 
   #endregion
@@ -42,7 +40,6 @@ public class GameLoop : MonoBehaviour
   {
     //Todo Restart and Credits Button
 
-    timer.currentRound = currentRound;
     recordButtonText1.text = "Record";
     recordButtonText2.text = "Record";
     scoreTextfieldPlayer1.text = score1.ToString();

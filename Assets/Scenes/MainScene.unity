@@ -214,7 +214,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 707204759792429930}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlayVareedSound
         m_Mode: 3
@@ -2122,17 +2122,9 @@ MonoBehaviour:
   timeText: {fileID: 1093175863}
   timerIsRunning: 0
   duration: 3
-  currentRound: 0
+  gameLoop: {fileID: 1164571537}
   uiAnimation: {fileID: 1093175865}
-  frequencies:
-  - 172
-  - 344
-  - 516
-  - 688
-  - 860
-  - 1032
-  - 1204
-  - 1376
+  gameManager: {fileID: 1164571536}
 --- !u!114 &1093175863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2327,9 +2319,9 @@ MonoBehaviour:
   scoreTextFieldPlayer2: {fileID: 658135726}
   recordButtonText1: {fileID: 1866518925}
   recordButtonText2: {fileID: 116794422}
-  timer: {fileID: 1093175862}
   gameManager: {fileID: 1164571536}
-  audioListener: {fileID: 707204759792429930}
+  audioListener: {fileID: 0}
+  currentRound: 0
 --- !u!1 &1235286997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,7 +2565,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 707204759792429930}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlayVareedSound
         m_Mode: 3
@@ -3064,7 +3056,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 707204759792429930}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlayVareedSound
         m_Mode: 3
@@ -3350,7 +3342,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 707204759792429930}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlayVareedSound
         m_Mode: 3
@@ -3793,31 +3785,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7575293397729404923, guid: 7d7b24faadec1334fa1847c4d2edb3bc, type: 3}
   m_PrefabInstance: {fileID: 8830806547255014972}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &707204759792429930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1156209010363830518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b57f824672f166b008847cab3676e210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 3965798610724494983}
-  audioClips:
-  - {fileID: 8300000, guid: c0b30d735ba5ae849bf9b2bc6db9466a, type: 3}
-  - {fileID: 8300000, guid: ad4c4cd664f4eac63b1e0c53d34f13b3, type: 3}
-  - {fileID: 8300000, guid: 9176930da03c21a24a3525972d94d366, type: 3}
-  - {fileID: 8300000, guid: 98da6b79a0d670032a84f2a8656d1e32, type: 3}
-  - {fileID: 8300000, guid: c19f6f2eaee24b4df870e731324dff24, type: 3}
-  - {fileID: 8300000, guid: 9fbecd7c1188a490fa5a1a729313d6f1, type: 3}
-  - {fileID: 8300000, guid: e029ecf36ef99926786cb384082d9ae3, type: 3}
-  - {fileID: 8300000, guid: 7f7ada11a8bb9827e9932eb03b75fdd4, type: 3}
-  - {fileID: 8300000, guid: 9b96cb5774ea47bd0924bed4f74a6ad3, type: 3}
-  - {fileID: 8300000, guid: 3d3f1cbaa7679b5df915152c6f09cdac, type: 3}
-  - {fileID: 8300000, guid: 5e3548943daa59ff389928b34dc100f5, type: 3}
 --- !u!1 &1156209010363830518
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,7 +3795,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2429755361295462367}
   - component: {fileID: 3965798610724494983}
-  - component: {fileID: 707204759792429930}
   m_Layer: 0
   m_Name: CrossSoundPlayer
   m_TagString: Untagged
@@ -4573,7 +4539,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 707204759792429930}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: PlaySound
         m_Mode: 3

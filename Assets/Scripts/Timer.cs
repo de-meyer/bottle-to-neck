@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
   public float duration = 3;
   float timeRemaining;
   List<float> pitches = new List<float>();
-  public int currentRound;
+  [SerializeField] private GameLoop gameLoop;
 
   [SerializeField] private Animator uiAnimation;
 
@@ -51,7 +51,7 @@ public class Timer : MonoBehaviour
         if (timeRemaining <= 0)
         {
           uiAnimation.SetBool(IsRunning, false);
-          PlaySound(currentRound);
+          PlaySound();
         }
       }
       else
@@ -76,12 +76,17 @@ public class Timer : MonoBehaviour
     }
   }
 
-  private void PlaySound(int index)
+  private void PlaySound()
   {
     // 1f   pitch results in   172Hz
     // // 7.2f pitch results in 1.375Hz (only by testing not by math)
     // 18   pitch results in 1.376Hz
 
+    int index = gameLoop.currentRound;
+    Debug.Log("Playing sound of round " + index
+      + " with frequency " + gameManager.frequencies[index]
+      + " and pitch " + pitches[index])
+    ;
     audioSource.pitch = pitches[index];
     Debug.Log("Pitch set to " + pitches[index]);
     audioSource.Play();
