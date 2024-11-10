@@ -1,28 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
-
 
 public class Timer : MonoBehaviour
 {
-  public float duration = 3;
   public AudioSource audioSource;
   public TextMeshProUGUI timeText;
-  float timeRemaining;
   public bool timerIsRunning = false;
+  public float duration = 3;
+  float timeRemaining;
+
+  [SerializeField] private Animator uiAnimation;
 
   List<int> sips = new List<int>();
-  // const float frequencyWhenFull = 1376;                        // Hertz
+  // const float frequencyWhenFull = 1376;                     // Hertz
   const float frequencyWhenEmpty = 172;                        // Hertz
 
   public List<float> frequencies = new List<float> { 172, 344, 516, 688, 860, 1032, 1204, 1376 };
 
-  private void Start()
+  public void StartTimer()
   {
     // Starts the timer automatically
     Debug.Log("Timer with duration of " + duration + "s started.");
+    uiAnimation.enabled = true;
+    uiAnimation.Play("CountdownAnim", 0, 0f);
     timerIsRunning = true;
     timeRemaining = duration;
     timeText.text = duration.ToString();
@@ -80,7 +81,7 @@ public class Timer : MonoBehaviour
     }
     else
     {
-      timeText.text = "*toooot*";
+      timeText.text = string.Empty;
     }
   }
 

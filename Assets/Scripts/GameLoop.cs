@@ -82,10 +82,6 @@ public class GameLoop : MonoBehaviour
     }
   }
   
-  #endregion
-
-  #region private methods
-  
   public void BottleToNeck(int winner)
   {
     if (winner == 1)
@@ -98,6 +94,10 @@ public class GameLoop : MonoBehaviour
       charAnimatorP2.SetBool("punch", true);
       charAnimatorP1.SetBool("stunned", true);
     }
+
+    StartCoroutine(Wait(5));
+    gameOverCanvas.SetActive(true);
+    gameCanvas.SetActive(false);
   }
   
   #endregion
@@ -109,6 +109,11 @@ public class GameLoop : MonoBehaviour
     yield return new WaitForSeconds(seconds);
     charAnimatorP1.SetBool(animation, true);
     charAnimatorP2.SetBool(animation, true);
+  }
+
+  private IEnumerator Wait(int seconds)
+  {
+    yield return new WaitForSeconds(seconds);
   }
 
   private IEnumerator RecordAndScore(int player)
