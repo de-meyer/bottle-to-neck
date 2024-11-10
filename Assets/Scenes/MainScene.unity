@@ -3868,7 +3868,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicPlayer: {fileID: 2086322105}
-  MuffleSoundPercent: 0
+  MuffleSoundPercent: 50
   audioListener: {fileID: 1432295797}
   trialLeniencyAmount: 0
   victorySoundPlayer: {fileID: 930929512}
