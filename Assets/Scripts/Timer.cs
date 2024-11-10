@@ -4,6 +4,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+  [SerializeField] private AudioManager audioManager;
   public AudioSource audioSource;
   public TextMeshProUGUI timeText;
   public bool timerIsRunning = false;
@@ -66,6 +67,7 @@ public class Timer : MonoBehaviour
   void DisplayTime(float timeToDisplay)
   {
     int seconds = Mathf.Max(Mathf.FloorToInt(timeToDisplay), 0);
+    audioManager.PlaySound(10+seconds);
     if (seconds > 0)
     {
       timeText.text = seconds.ToString();
